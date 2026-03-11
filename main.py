@@ -34,7 +34,7 @@ while True:
         print("Wrong guess. Try again!")
 
 #-------------------------------------------------------------------------------------------------#   
-#  DAY 2#
+###########  DAY 2   ##########
 #-------------------------------1st pragram-------------------------
 given_list = [10, 501 , 22 , 37 , 100 ,999 ,87 , 351]
 
@@ -50,7 +50,7 @@ for num in given_list:
 print("even list:",  Even_Number_list)        
 print("Odd list:", Odd_Number_list)
 
-#----------------2ndprogram--------------------------------------------
+#---------------------------------2ndprogram-----------------------------------------------
 
 given_list = [10, 501, 22, 37, 100, 999, 87, 351]
 
@@ -68,6 +68,31 @@ for num in given_list:
 
 print("Prime numbers are:", prime_list)
 print("Count of prime numbers:", len(prime_list))
+#-----------------------------------Program 3 Happy Numbers-------------------------
+
+numbers = [10, 501, 22, 37, 100, 999, 87, 351]
+
+def is_happy(num):
+    while num != 1 and num != 4:   
+        total = 0
+        
+        while num > 0:
+            digit = num % 10
+            total += digit * digit
+            num = num // 10
+        
+        num = total
+    
+    return num == 1
+
+
+count = 0
+
+for n in numbers:
+    if is_happy(n):
+        count += 1
+
+print("Total Happy Numbers:", count)
 
 #-----------------------------------program 4 sum of firist and last digit ------------------------------------------
 
@@ -115,7 +140,7 @@ for num in list1:
 
 print("Duplicate elements:", duplicates)
 
-#-------------------------------------program 7 no-repeating element------------
+#-------------------------------------program 7 no-repeating element-------------------------
 
 numbers = [4, 5, 1, 2, 0, 4, 1, 2]
 
@@ -123,12 +148,12 @@ for num in numbers:
     if numbers.count(num) == 1:
         print("First non-repeating element:", num)
         break
-#----------------------------------program  8 min element in list-------------
+#----------------------------------program  8 min element in list---------------------------
 
 numbers = [1, 5, 7, 3, 2]
 print("Minimum element:", min(numbers))
 
-#----------------------------------pogram 10 sub list sum equal to 0     ----------------------------
+#----------------------------------pogram 10 sub list sum equal to 0---------------------------------
 
 numbers = [4, 2, -3, 1, 6]
 
@@ -151,5 +176,88 @@ for i in range(len(numbers)):
 if not found:
     print("No sub-list with sum 0")
 
- #---------------------------------------END-------------------------------------   
-     
+ #------------------------------------------------------------------------------------- 
+ # Program 1: Filter people under 18 and get remaining names
+
+people = [
+    {"name": "Ravi", "age": 22},
+    {"name": "Anu", "age": 16},
+    {"name": "Kiran", "age": 19},
+    {"name": "Meena", "age": 15}
+]
+
+adults = list(filter(lambda p: p["age"] >= 18, people))
+names = list(map(lambda p: p["name"], adults))
+
+print(names)
+
+#------- Filter Adults And Map Names -------#
+
+
+
+# Program 2: Product of all numbers using reduce and lambda
+
+from functools import reduce
+
+numbers = [2, 3, 4, 5]
+
+product = reduce(lambda x, y: x * y, numbers)
+
+print(product)
+
+#------- Product Using Reduce -------#
+
+
+
+# Program 3: Squares of even numbers using list comprehension and lambda
+
+numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+
+is_even = lambda x: x % 2 == 0
+
+squares = [x**2 for x in numbers if is_even(x)]
+
+print(squares)
+
+#------- Squares Of Even Numbers -------#
+
+
+
+# Program 4: Lambda to check if a string is a number
+
+check_number = lambda s: s.isdigit()
+
+print(check_number("123"))
+print(check_number("abc"))
+
+#------- Check String Is Number -------#
+
+
+
+# Program 5: Extract year, month, day using lambda
+
+from datetime import datetime
+
+date = datetime.now()
+
+extract_date = lambda d: (d.year, d.month, d.day)
+
+print(extract_date(date))
+
+#------- Extract Date Parts -------#
+
+
+
+# Program 6: Generate Fibonacci series up to n terms using lambda
+
+fib = lambda n: [0, 1] if n == 2 else [0, 1] + [0]*(n-2)
+
+def fibonacci(n):
+    seq = fib(n)
+    for i in range(2, n):
+        seq[i] = seq[i-1] + seq[i-2]
+    return seq[:n]
+
+print(fibonacci(10))
+
+#------- Fibonacci Series -------#    
