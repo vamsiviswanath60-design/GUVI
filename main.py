@@ -260,4 +260,105 @@ def fibonacci(n):
 
 print(fibonacci(10))
 
-#------- Fibonacci Series -------#    
+#----------------------------------------------------------------------------------#   
+#------- Problem 1 : Bank Account -------#
+
+class BankAccount:
+    def __init__(self, account_number, balance):
+        self.account_number = account_number
+        self.__balance = balance   # encapsulation
+
+    def deposit(self, amount):
+        self.__balance += amount
+        print("Deposited:", amount)
+
+    def withdraw(self, amount):
+        if amount > self.__balance:
+            print("Insufficient balance")
+        else:
+            self.__balance -= amount
+            print("Withdrawn:", amount)
+
+    def get_balance(self):
+        return self.__balance
+
+
+class SavingsAccount(BankAccount):
+    def __init__(self, account_number, balance, interest_rate):
+        super().__init__(account_number, balance)
+        self.interest_rate = interest_rate
+
+    def calculate_interest(self):
+        interest = self.get_balance() * self.interest_rate / 100
+        print("Interest:", interest)
+
+
+class CurrentAccount(BankAccount):
+    def __init__(self, account_number, balance, min_balance):
+        super().__init__(account_number, balance)
+        self.min_balance = min_balance
+
+    def withdraw(self, amount):
+        if self.get_balance() - amount < self.min_balance:
+            print("Minimum balance requirement not maintained")
+        else:
+            super().withdraw(amount)
+
+
+# Example usage
+s = SavingsAccount("101", 1000, 5)
+s.deposit(500)
+s.withdraw(200)
+s.calculate_interest()
+
+c = CurrentAccount("102", 2000, 500)
+c.withdraw(1800)
+
+
+#------- Problem 2 : Employee Management -------#
+
+class Employee:
+    def __init__(self, name):
+        self.name = name
+
+    def calculate_salary(self):
+        pass
+
+
+class RegularEmployee(Employee):
+    def __init__(self, name, salary):
+        super().__init__(name)
+        self.salary = salary
+
+    def calculate_salary(self):
+        return self.salary
+
+
+class ContractEmployee(Employee):
+    def __init__(self, name, hours, rate):
+        super().__init__(name)
+        self.hours = hours
+        self.rate = rate
+
+    def calculate_salary(self):
+        return self.hours * self.rate
+
+
+class Manager(Employee):
+    def __init__(self, name, salary, bonus):
+        super().__init__(name)
+        self.salary = salary
+        self.bonus = bonus
+
+    def calculate_salary(self):
+        return self.salary + self.bonus
+
+
+# Example usage
+e1 = RegularEmployee("John", 30000)
+e2 = ContractEmployee("Mike", 120, 200)
+e3 = Manager("Sara", 50000, 10000)
+
+print(e1.name, "Salary:", e1.calculate_salary())
+print(e2.name, "Salary:", e2.calculate_salary())
+print(e3.name, "Salary:", e3.calculate_salary())
